@@ -43,7 +43,7 @@ public class InstructorController {
     @PostMapping("{companyId}/saveInstructor")
     public String saveInstructor(@PathVariable("companyId") Long id,
                                   @ModelAttribute("newInstructor") Instructor instructor) {
-        instructorService.addInstructor(instructor);
+        instructorService.addInstructor(id,instructor);
         return "redirect:/instructors/allInstructors/ " + id;
     }
 
@@ -62,8 +62,7 @@ public class InstructorController {
     }
 
     @PostMapping("/{companyId}/{instructorId}/saveUpdate")
-    public String saveUpdate(@PathVariable("companyId") Long companyId,
-                              @PathVariable("instructorId") Long id,
+    public String saveUpdate(@PathVariable("companyId") Long companyId, @PathVariable("instructorId") Long id,
                               @ModelAttribute("instructor") Instructor instructor) {
         instructorService.updateInstructor(id, instructor);
         return "redirect:/instructors/allInstructors/" + companyId;

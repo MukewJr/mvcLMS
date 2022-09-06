@@ -33,7 +33,7 @@ public class StudentController {
         model.addAttribute("allStudents", studentService.getAllStudents(companyId));
         model.addAttribute("companyId",companyId);
         Company company = companyService.getCompanyById(companyId);
-        List<Course> courses = company.getCourses();
+        //List<Course> courses = company.getCourses();
         model.addAttribute("courses", courseService.getAllCourses(companyId));
         return "student/mainStudent";
     }

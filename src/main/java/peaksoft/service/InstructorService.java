@@ -8,14 +8,16 @@ import java.util.List;
 
 public interface InstructorService {
 
-    List<Instructor> getAllInstructors(Long companyId);
+    List<Instructor> getAllInstructors(Long id);
 
-    void addInstructor(Instructor instructor);
+    void addInstructor(Long id,Instructor instructor);
 
-    Instructor getInstructorById(long id);
+    Instructor getInstructorById(Long id);
 
     void deleteInstructorById(Long id);
 
     void updateInstructor(Long id, Instructor instructor);
+
     void assignInstructorToCourse(Long instructorId, Long courseId);
+
 }

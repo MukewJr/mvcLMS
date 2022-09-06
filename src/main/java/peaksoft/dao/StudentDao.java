@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface StudentDao {
 
+    List<Student> countOfStudents(Long id);
+
     void saveStudent(Long id, Student student);
 
     void updateStudent(Long id, Student student);
@@ -19,5 +21,5 @@ public interface StudentDao {
 
     void assignStudentToCourse(Long studentId, Long courseId);
 
-    List<Student> countOfStudents(Long id);
+
 }

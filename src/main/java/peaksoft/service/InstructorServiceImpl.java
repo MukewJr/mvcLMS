@@ -18,17 +18,17 @@ public class InstructorServiceImpl implements InstructorService{
     }
 
     @Override
-    public List<Instructor> getAllInstructors(Long companyId) {
-        return instructorDao.getAllInstructors();
+    public List<Instructor> getAllInstructors(Long id) {
+        return instructorDao.getAllInstructors(id);
     }
 
     @Override
-    public void addInstructor(Instructor instructor) {
-     instructorDao.addInstructor(instructor);
+    public void addInstructor(Long id,Instructor instructor) {
+     instructorDao.addInstructor(id,instructor);
     }
 
     @Override
-    public Instructor getInstructorById(long id) {
+    public Instructor getInstructorById(Long id) {
         return instructorDao.getInstructorById(id);
     }
 

@@ -30,7 +30,6 @@ public class Student {
     private String phoneNumber;
     private String email;
     @Column(name = "study_format")
-    @Enumerated(value = EnumType.STRING)
     private StudyFormat studyFormat;
 
     public Student(String firstName, String lastName, String phoneNumber, String email,StudyFormat studyFormat) {

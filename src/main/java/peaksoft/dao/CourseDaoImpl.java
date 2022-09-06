@@ -15,7 +15,8 @@ public class CourseDaoImpl implements CourseDao{
 
     @Override
     public List<Course> getAllCourses(Long id) {
-        List<Course> courses=manager.createQuery("from Course", Course.class).getResultList();
+        List<Course> courses=manager.createQuery("select c from Course c where c.company.companyId=:id",
+                Course.class).setParameter("id",id).getResultList();
         return courses;
     }
 
@@ -25,7 +26,7 @@ public class CourseDaoImpl implements CourseDao{
     }
 
     @Override
-    public Course getCourseById(long id) {
+    public Course getCourseById(Long id) {
         return manager.find(Course.class,id);
     }
 

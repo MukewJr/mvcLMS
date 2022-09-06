@@ -2,6 +2,7 @@ package peaksoft.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import peaksoft.entity.Company;
 import peaksoft.entity.Course;
 import peaksoft.entity.Instructor;
 import peaksoft.entity.Student;
@@ -18,13 +19,17 @@ public class InstructorDaoImpl implements InstructorDao{
     private EntityManager manager;
 
     @Override
-    public List<Instructor> getAllInstructors() {
-        List<Instructor> instructors=manager.createQuery("select i from Instructor i",Instructor.class).getResultList();
+    public List<Instructor> getAllInstructors(Long id) {
+        List<Instructor> instructors=manager.createQuery("select i from Instructor i where i.company.companyId=:id",Instructor.class).
+                setParameter("id",id).getResultList();
         return instructors;
     }
 
     @Override
-    public void addInstructor(Instructor instructor) {
+    public void addInstructor(Long id,Instructor instructor) {
+        Company company=manager.find(Company.class,id);
+        company.addInstructor(instructor);
+        instructor.setCompany(company);
       manager.persist(instructor);
     }
 

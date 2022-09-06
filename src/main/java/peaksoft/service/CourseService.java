@@ -10,7 +10,7 @@ public interface CourseService {
 
     void saveCourse(Long id,Course course);
 
-    Course getCourseById(long id);
+    Course getCourseById(Long id);
 
     void updateCourse(Long id,Course course);
 

@@ -6,9 +6,9 @@ import peaksoft.entity.Student;
 import java.util.List;
 
 public interface InstructorDao {
-    List<Instructor> getAllInstructors();
+    List<Instructor> getAllInstructors(Long id);
 
-    void addInstructor(Instructor instructor);
+    void addInstructor(Long id,Instructor instructor);
 
     Instructor getInstructorById(Long id);
 

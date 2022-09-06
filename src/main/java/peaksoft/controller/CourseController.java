@@ -34,6 +34,7 @@ public class CourseController {
         model.addAttribute("allCourses", courseService.getAllCourses(companyId));
         model.addAttribute("companyId",companyId);
         Company company=companyService.getCompanyById(companyId);
+        List<Instructor> instructors=company.getInstructors();
         model.addAttribute("instructors",instructorService.getAllInstructors(companyId));
         return "courses/innerPageCompany";
     }
@@ -73,7 +74,7 @@ public class CourseController {
         return "redirect:/courses/allCourses"+companyId;
     }
 
-    @RequestMapping("/{id}/{courseId}/deleteCourse")
+    @DeleteMapping("/{id}/{courseId}/deleteCourse")
     public String deleteCourse(@PathVariable("id") Long id,@PathVariable("courseId") Long courseId){
         courseService.deleteCourse(courseService.getCourseById(id));
         return "redirect:/courses/allCourses"+courseId;

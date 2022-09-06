@@ -1,6 +1,7 @@
 package peaksoft.dao;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import peaksoft.entity.Company;
 import peaksoft.entity.Course;
 import peaksoft.entity.Student;
@@ -11,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
+@EnableTransactionManagement
 
 public class StudentDaoImpl implements StudentDao{
     @PersistenceContext
@@ -19,7 +20,10 @@ public class StudentDaoImpl implements StudentDao{
 
     @Override
     public void saveStudent(Long id, Student student) {
-         manager.persist(student);
+        Company company=manager.find(Company.class,id);
+        company.addStudent(student);
+        student.setCompany(company);
+        manager.persist(student);
     }
 
     @Override
@@ -35,7 +39,8 @@ public class StudentDaoImpl implements StudentDao{
 
     @Override
     public List<Student> getAllStudents(Long id) {
-        List<Student> studentList=manager.createQuery("select s from Student s",Student.class).getResultList();
+        List<Student> studentList=manager.createQuery("select s from Student s where s.company.companyId=:id",
+                Student.class).setParameter("id",id).getResultList();
         return studentList;
     }
 
@@ -47,6 +52,7 @@ public class StudentDaoImpl implements StudentDao{
     @Override
     public void deleteStudentById(Long id) {
         Student student=manager.find(Student.class,id);
+        student.setCourse(null);
         manager.remove(student);
     }
 
